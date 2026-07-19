@@ -44,11 +44,11 @@ function botuBaslat() {
         const msg = message.toString().toLowerCase();
         
         if (msg.includes('/register') || msg.includes('kayit') || msg.includes('register')) {
-            bot.chat('/register legacy123 legacy123');
-            setTimeout(() => bot.chat('/login legacy123'), 2000);
+            bot.chat('/register bot123 bot123');
+            setTimeout(() => bot.chat('/login bot123'), 2000);
             console.log('[AUTH] Sunucuya kayıt olundu ve giriş yapıldı.');
         } else if (msg.includes('/login') || msg.includes('sifre') || msg.includes('giris')) {
-            bot.chat('/login legacy123');
+            bot.chat('/login bot123');
             console.log('[AUTH] Sunucuya giriş yapıldı.');
         }
     });
