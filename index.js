@@ -32,25 +32,20 @@ function botuBaslat() {
     bot.once('spawn', () => {
         console.log(`[BAŞARILI] ${AYARLAR.isim} sunucuya giriş yaptı ve dünyada doğdu!`);
         
+        // --- KESİN GİRİŞ SİSTEMİ ---
+        // Sunucuya doğar doğmaz hem kayıt olmayı hem giriş yapmayı dener. 
+        // Böylece AuthMe mesajlarını beklemeden direkt içeri dalar.
+        setTimeout(() => {
+            bot.chat('/register legacy123 legacy123');
+            bot.chat('/login legacy123');
+            console.log('[AUTH] Kayıt ve Giriş komutları aynı anda gönderildi.');
+        }, 2000);
+        
         // Anti-AFK (5 dakikada bir zıplar)
         setInterval(() => {
             bot.setControlState('jump', true);
             setTimeout(() => bot.setControlState('jump', false), 1000);
         }, 300000);
-    });
-
-    // Kayıt ve Giriş İşlemleri (AuthMe)
-    bot.on('message', (message) => {
-        const msg = message.toString().toLowerCase();
-        
-        if (msg.includes('/register') || msg.includes('kayit') || msg.includes('register')) {
-            bot.chat('/register bot123 bot123');
-            setTimeout(() => bot.chat('/login bot123'), 2000);
-            console.log('[AUTH] Sunucuya kayıt olundu ve giriş yapıldı.');
-        } else if (msg.includes('/login') || msg.includes('sifre') || msg.includes('giris')) {
-            bot.chat('/login bot123');
-            console.log('[AUTH] Sunucuya giriş yapıldı.');
-        }
     });
 
     // Bağlantı koparsa veya hata alırsa otomatik yeniden bağlan
